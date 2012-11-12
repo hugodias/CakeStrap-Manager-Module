@@ -113,8 +113,8 @@
                   
                   <?php echo $this->Html->script(
                     array(
-                      'lib/bootstrap.min',
-                      'src/scripts.js'
+                      $this->plugin.'.lib/bootstrap.min',
+                      $this->plugin.'.src/scripts.js'
                       ));
                       ?>
 
