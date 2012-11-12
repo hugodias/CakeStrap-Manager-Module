@@ -17,10 +17,10 @@
     padding-bottom: 40px;
   }
   </style>
-  <?php echo $this->Html->css( $this->plugin.'.normalize.css') ?>
-  <?php echo $this->Html->css( $this->plugin.'.bootstrap-'.Configure::read('Layout.theme').'.min', null, array('data-extra' => 'theme')) ?>
-  <?php echo $this->Html->css( $this->plugin.'.bootstrap-responsive.min') ?>
-  <?php echo $this->Html->css( $this->plugin.'.style') ?>
+  <?php echo $this->Html->css( 'Gerenciador.normalize.css') ?>
+  <?php echo $this->Html->css( 'Gerenciador.bootstrap-'.Configure::read('Layout.theme').'.min', null, array('data-extra' => 'theme')) ?>
+  <?php echo $this->Html->css( 'Gerenciador.bootstrap-responsive.min') ?>
+  <?php echo $this->Html->css( 'Gerenciador.style') ?>
 
   <?php echo $this->Html->script( $this->plugin. '.lib/modernizr') ?>
 </head>
@@ -100,7 +100,7 @@
                   </div> <!-- /container -->
 
                   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-                  <?php echo $this->Html->script( $this->plugin.'.lib/jquery.tmpl.min') ?>
+                  <?php echo $this->Html->script( 'Gerenciador.lib/jquery.tmpl.min') ?>
                   <?php
 
                   # Path for plugin assets
@@ -113,8 +113,8 @@
                   
                   <?php echo $this->Html->script(
                     array(
-                      $this->plugin.'.lib/bootstrap.min',
-                      $this->plugin.'.src/scripts.js'
+                      'Gerenciador.lib/bootstrap.min',
+                      'Gerenciador.src/scripts.js'
                       ));
                       ?>
 
