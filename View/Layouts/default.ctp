@@ -17,22 +17,12 @@
     padding-bottom: 40px;
   }
   </style>
-  <?php echo $this->Html->css('normalize.css') ?>
-  <?php echo $this->Html->css('bootstrap-'.Configure::read('Layout.theme').'.min', null, array('data-extra' => 'theme')) ?>
-  <?php echo $this->Html->css('bootstrap-responsive.min') ?>
-  <?php echo $this->Html->css('style') ?>
+  <?php echo $this->Html->css( $this->plugin.'.normalize.css') ?>
+  <?php echo $this->Html->css( $this->plugin.'.bootstrap-'.Configure::read('Layout.theme').'.min', null, array('data-extra' => 'theme')) ?>
+  <?php echo $this->Html->css( $this->plugin.'.bootstrap-responsive.min') ?>
+  <?php echo $this->Html->css( $this->plugin.'.style') ?>
 
-  <?php
-  if (is_file(WWW_ROOT . 'css' . DS . $this->params->controller . '.css')) {
-  echo $this->Html->css($this->params->controller);
-  }
-  if (is_file(WWW_ROOT . 'css' . DS . $this->params->controller . DS . $this->params->action . '.css')) {
-  echo $this->Html->css($this->params->controller . '/' . $this->params->action);
-  }
-  ?>
-
-
-  <?php echo $this->Html->script('lib/modernizr') ?>
+  <?php echo $this->Html->script( $this->plugin. '.lib/modernizr') ?>
 </head>
 <body>
         <!--[if lt IE 7]>
@@ -110,8 +100,7 @@
                   </div> <!-- /container -->
 
                   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-                  <script>window.jQuery || document.write('<script src="<?php echo $this->params->webroot ?>js/lib/jquery.min.js"><\/script>')</script>
-                  <?php echo $this->Html->script('lib/jquery.tmpl.min') ?>
+                  <?php echo $this->Html->script( $this->plugin.'.lib/jquery.tmpl.min') ?>
                   <?php
 
                   # Path for plugin assets
