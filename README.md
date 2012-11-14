@@ -1,14 +1,20 @@
 # CakeStrap Modulo Gerenciador v 0.1 Alpha
 ---
-This is a management module for [cakeStrap][]
+Modulo gerenciador para o [cakeStrap][]
 [cakeStrap]: https://github.com/hugodias/cakeStrap
 
 
-## Quick start
+## Começando
 
-1. Clone or Download this repository into your cakeStrap plugins folder: `app/Plugin/Gerenciador`
-2. Go to `app/Config/bootstrap.app` and include the plugin in your application <pre>CakePlugin::load('Gerenciador');</pre>
-3. Create the database structure bellow:<pre>CREATE TABLE IF NOT EXISTS `photos` (
+1. Clone ou faça o download do Gerenciador e coloque na pasta: `app/Plugin/Gerenciador`
+2. Vá até `app/Config/bootstrap.app` e inclua o plugin em sua aplicação <pre>
+CakePlugin::load(array(
+	'Gerenciador' => array(
+		'bootstrap' => true,
+		'routes' => true
+		)));
+</pre>
+3. Cria um banco de dados com a seguinte estrutura:<pre>CREATE TABLE IF NOT EXISTS `photos` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) NOT NULL,
   `photo` varchar(255) NOT NULL,
@@ -23,21 +29,21 @@ This is a management module for [cakeStrap][]
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=18 ;</pre>
 
 
-### Features
+### Funcionalidades
 
-##### Photos
-2. Photo gallery
+##### Fotos
+2. Galeria de fotos
 3. Multiple photo upload
 4. Thumbnails
 
 
 ##### Videos
-1. Simple LINK Search engine for youtube
-2. Video sugestions ( working on it )
-3. Automatic save video informations on database ( Link, Name, Thumbnail )
+1. Inclusão de vídeos do youtube por link
+2. Sugestões de vídeos ( em desenvolvimento )
+3. Armazenamento das informações do video no banco de dados automaticamente ( Link, Nome, Thumbnail )
 
 
-## Questions / Bugs
+## Dúvidas / Bugs
 
-Have a question or found a bug? Please create an issue [here][] on GitHub!
-[here]: https://github.com/hugodias/cakestrap_gerenciador_module/issues
+Tem alguma dúvida ou achou algum bug? Crie uma issue [aqui][] no GitHub!
+[aqui]: https://github.com/hugodias/cakestrap_gerenciador_module/issues
