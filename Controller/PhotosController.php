@@ -13,6 +13,8 @@ class PhotosController extends GerenciadorAppController
 	{
 		if(!empty($_FILES))
 		{
+			$errors = array();
+
 			// Organiza o array de multiple upload
 			$files = $this->Arquivo->MultipleFiles( $_FILES['multipleFiles'] );
 			
@@ -25,31 +27,62 @@ class PhotosController extends GerenciadorAppController
 					// Faz o upload da foto no tamanho original
 					if( $foto = $this->Arquivo->upload($file,'fotos/') )
 					{
-						// Cria o thumbnail
-						$thumbnail = $this->Arquivo->generateThumbnail($file,'fotos/',218,163,'crop',$foto['nome_no_ext']);
+						// Verifica o tamanho mínimo para criar o thumbnail
+						if( !$this->Arquivo->validaTamanho(
+							$foto['link'],
+							Configure::read('Gerenciador.photo_thumbnail_size.0'), // Width
+							Configure::read('Gerenciador.photo_thumbnail_size.1'), // Height
+							'min'						
+							) )
+						{
+							array_push($errors,$foto['nome']);
+						}
+						else
+						{							
+							// Cria o thumbnail
+							$thumbnail = $this->Arquivo->generateThumbnail(
+								$file, // File
+								'fotos/', // Pasta em que será salvo
+								Configure::read('Gerenciador.photo_thumbnail_size.0'), // Width
+								Configure::read('Gerenciador.photo_thumbnail_size.1'), // Height
+								'crop', // Crop
+								$foto['nome_no_ext']); // Nome do arquivo sem extensão
 
-						// Salva os dados no banco
-						$data = array(
-							'Photo' => array(
-								'nome' => $foto['nome'],
-								'photo' => $foto['link'],
-								'thumbnail' => $thumbnail['link'],
-							)
-						);
-						$this->Photo->create();
-						$this->Photo->save($data);						
+							// Salva os dados no banco
+							$data = array(
+								'Photo' => array(
+									'nome' => $foto['nome'],
+									'photo' => $foto['link'],
+									'thumbnail' => $thumbnail['link'],
+								)
+							);
+							$this->Photo->create();
+							$this->Photo->save($data);						
+						}
 					}
+
 				}
 			}
 
 			$this->Session->setFlash('Fotos cadastradas com sucesso.','flash_success');
+
+			# Verifica se alguma imagem foi inválida
+			if( count($errors) > 0 )
+			{
+				$message = '';
+
+				foreach ($errors as $error) 
+				{
+					$message .= 'A imagem <strong>'.$error.'</strong> deve ter pelo menos '.Configure::read('Gerenciador.photo_thumbnail_size.0').'x'.Configure::read('Gerenciador.photo_thumbnail_size.1').'pixels. Upload cancelado.<br/>';
+				}
+
+				$this->Session->setFlash($message,'flash_fail');
+			}
+
 			$this->redirect(array('action' => 'index'));
 		}
 	}
 
-	public function edit($id = null)
-	{
-	}
 
 	public function delete($id = null)
 	{
@@ -71,8 +104,5 @@ class PhotosController extends GerenciadorAppController
 		$this->redirect(array('action' => 'index'));
 	}
 
-	public function view($id = null)
-	{
-	}
 }
 ?>
