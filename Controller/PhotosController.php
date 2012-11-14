@@ -2,7 +2,7 @@
 class PhotosController extends GerenciadorAppController
 {
 	public $uses = array('Gerenciador.Photo','Gerenciador.Product');
-	public $components = array('Arquivo');
+	public $components = array('Gerenciador.Arquivo');
 
 	public function index()
 	{
