@@ -104,5 +104,28 @@ class PhotosController extends GerenciadorAppController
 		$this->redirect(array('action' => 'index'));
 	}
 
+
+	public function delete_all()
+	{
+		if ($this->request->is('post')) 
+		{
+			$photos = explode(",",$_POST['photos']);
+
+			foreach ($photos as $photo) 
+			{
+				$this->Photo->id = $photo;
+
+				$foto = $this->Photo->read(null);
+
+				unlink(WWW_ROOT.$foto['Photo']['photo']);
+				unlink(WWW_ROOT.$foto['Photo']['thumbnail']);
+
+				$this->Photo->delete();
+			}
+		}
+
+		$this->layout = '';
+	}
+
 }
 ?>

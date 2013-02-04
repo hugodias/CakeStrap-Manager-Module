@@ -21,6 +21,16 @@
   <?php echo $this->Html->css( 'Gerenciador.bootstrap-'.Configure::read('Layout.theme').'.min', null, array('data-extra' => 'theme')) ?>
   <?php echo $this->Html->css( 'Gerenciador.bootstrap-responsive.min') ?>
   <?php echo $this->Html->css( 'Gerenciador.style') ?>
+  
+
+  <?php
+  # CSS Plugin Path
+  $css_path = ROOT . DS . 'app' . DS . 'Plugin' . DS . $this->plugin . DS . 'webroot' . DS . 'css';
+
+  if (is_file($css_path . DS . $this->params->controller . DS . $this->params->action . '.css')) {
+    echo $this->Html->css('/'.$this->params->plugin.'/css/'.$this->params->controller . '/' . $this->params->action);
+  }
+  ?>
 
   <?php echo $this->Html->script( $this->plugin. '.lib/modernizr') ?>
 </head>
@@ -100,6 +110,7 @@
                   </div> <!-- /container -->
 
                   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+                  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
                   <?php echo $this->Html->script( 'Gerenciador.lib/jquery.tmpl.min') ?>
                   <?php
 

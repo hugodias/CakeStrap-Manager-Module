@@ -1,0 +1,22 @@
+#sortable > li > .thumbnail.selected{
+  background: #5D96E5 !important;
+}
+
+#sortable > li{
+  cursor:pointer;
+}
+
+#sortable { 
+  list-style-type: none; 
+  margin: 0; padding: 0; 
+  width: 950px; 
+}
+#sortable li { 
+  margin: 5px 5px 20px 5px;
+  padding: 1px; 
+  float: left; 
+  width: 220px; 
+  height: 165px; 
+  font-size: 4em; 
+  text-align: center; 
+}

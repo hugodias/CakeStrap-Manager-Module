@@ -1,3 +1,4 @@
+<div id="base" alt="<?php echo "http://".$_SERVER['SERVER_NAME'].Router::url('/').$this->params->plugin?>"></div>
 <div class="row-fluid">
 	<div class="span10">
 		<h2>Fotos</h2>
@@ -22,6 +23,28 @@
 
 <div class="row-fluid">
 	<div class="span12">
+		<a href="javascript:void(0)" class="btn btn-primary btn_selecionar_todas">
+			<i class="icon-th icon-white"></i> 
+			Selecionar todas</a>
+		<a href="javascript:void(0)" class="btn btn-danger hide btn_delete_all">
+			<i class="icon-remove icon-white"></i>
+			Deletar</a>			
+		<div class="fotos-selecionadas pull-right"><span><strong>0</strong></span> fotos selecionadas</div>
+	</div>
+</div>
+
+<hr>
+
+<div class="row-fluid">
+	<div class="span12">
+		<div class="alert">
+		  <strong>Atenção!</strong> Para remover as fotos, clique em cima da foto para seleciona-la, depois clique em deletar
+		</div>		
+	</div>
+</div>
+
+<!-- <div class="row-fluid">
+	<div class="span12">
 		<ul class="thumbnails">
 			<?php $i=0; ?>
 			<?php foreach ($photos as $photo): ?>
@@ -30,25 +53,42 @@
 					</ul>
 					<ul class="thumbnails">
 				<?php endif ?>
-				<li class="span3">
+				<li class="span3" alt="<?php echo $photo['Photo']['id'] ?>">
 	                <div class="thumbnail">
 	                  <img src="<?php echo $this->params->webroot.$photo['Photo']['thumbnail'] ?>" alt="<?php echo $photo['Photo']['nome'] ?>" title="<?php echo $photo['Photo']['nome'] ?>" width="218px" height="163px">
-	                  <div class="caption" style="text-align:center;">
-	                    	<?php echo $this->Html->link('Remover',
-	                    	array(
-	                    		'plugin' => 'gerenciador',
-	                    		'controller' => 'photos',
-	                    		'action' => 'delete',
-	                    		$photo['Photo']['id']
-	                    	),
-	                    	array(
-	                    		'class' => 'btn btn-danger'
-	                    	)) ?>
-	                  </div>
 	                </div>				
 				</li>
 				<?php $i++; ?>
 			<?php endforeach ?>
 		</ul>		
+	</div>
+</div> -->
+
+<div class="row-fluid">
+	<div class="span12">
+		<ul id="sortable">
+			<?php foreach ($photos as $photo): ?>
+				<li class="ui-state-default" alt="<?php echo $photo['Photo']['id'] ?>" id="<?php echo $photo['Photo']['id'] ?>">
+					<div class="thumbnail">
+						<img src="<?php echo $this->params->webroot.$photo['Photo']['thumbnail'] ?>" alt="<?php echo $photo['Photo']['nome'] ?>" title="<?php echo $photo['Photo']['nome'] ?>" width="218px" height="163px">
+					</div>
+				</li>	
+			<?php endforeach ?>
+		</ul>		
+	</div>
+</div>
+
+
+
+
+
+
+<hr>
+
+<div class="row-fluid">
+	<div class="span12">
+		<a href="javascript:void(0)" class="btn btn-primary btn_refresh">
+			<i class="icon-th-list icon-white"></i> 
+			Reordenar</a>		
 	</div>
 </div>
