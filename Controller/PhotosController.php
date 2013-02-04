@@ -6,7 +6,8 @@ class PhotosController extends GerenciadorAppController
 
 	public function index()
 	{
-		$this->set('photos',$this->Photo->find('all'));
+		$this->set('photos',$this->Photo->find('all',array(
+			'order' => array('Photo.order'))));
 	}
 
 	public function add()
@@ -121,6 +122,24 @@ class PhotosController extends GerenciadorAppController
 				unlink(WWW_ROOT.$foto['Photo']['thumbnail']);
 
 				$this->Photo->delete();
+			}
+		}
+
+		$this->layout = '';
+	}
+
+
+	public function sort()
+	{
+		if ($this->request->is('post')) 
+		{
+			$order = explode(",",$_POST['order']);
+			$i = 1;
+			foreach ($order as $photo) {
+				$this->Photo->read(null,$photo);
+				$this->Photo->set('order',$i);
+				$this->Photo->save();
+				$i++;
 			}
 		}
 

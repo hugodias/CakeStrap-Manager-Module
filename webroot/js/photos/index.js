@@ -1,33 +1,14 @@
-var photosArr = Array();
-var selected = false;
-
-function countPhotos() {
-  var count = photosArr.length;
-  $('.fotos-selecionadas').children('span').children('strong').html(count);
-}
-
-function showDeleteButton() {
-  if (photosArr.length === 0) {
-    $('.btn_delete_all').hide();
-  } else {
-    $('.btn_delete_all').show();
-  }
-}
-
-function hideDeletedPhotos() {
-  $.each($('#sortable').children('li'), function(){
-    var id = $(this).attr('alt');
-    if( photosArr.indexOf(id) != -1 ) {
-      $(this).hide(300);
-    }
-  })
-}
-
 $(function(){
+  var photosArr = Array();
+  var selected = false;  
   var BASE_URL = $('#base').attr('alt');
   $thumbnail = $('#sortable');
 
-  $( "#sortable" ).sortable();
+  $( "#sortable" ).sortable({
+    update: function(event,ui) {
+      saveOrder();
+    }
+  });
   $( "#sortable" ).disableSelection();
 
 
@@ -91,15 +72,6 @@ $(function(){
     showDeleteButton();
   });
 
-  $('.btn_refresh').click(function(){
-    var sorted = $( "#sortable" ).sortable( "toArray" ).join(",");
-    // $.post(BASE_URL + '/photos/sort',{
-    //   order: sorted
-    // })
-    console.log(sorted);
-  })
-
-
   $('.btn_delete_all').click(function(){
     var photos;
     // Converte o array em uma string com os valores separados por virgula
@@ -119,4 +91,36 @@ $(function(){
       showDeleteButton();
     });
   });
+
+  function countPhotos() {
+    var count = photosArr.length;
+    $('.fotos-selecionadas').children('span').children('strong').html(count);
+  }
+
+  function showDeleteButton() {
+    if (photosArr.length === 0) {
+      $('.btn_delete_all').hide();
+    } else {
+      $('.btn_delete_all').show();
+    }
+  }
+
+  function hideDeletedPhotos() {
+    $.each($('#sortable').children('li'), function(){
+      var id = $(this).attr('alt');
+      if( photosArr.indexOf(id) != -1 ) {
+        $(this).hide(300);
+      }
+    })
+  }
+
+  function saveOrder() {
+    var sorted = $( "#sortable" ).sortable( "toArray" ).join(",");
+    $.post(BASE_URL + '/photos/sort',{
+      order: sorted
+    },function(response){
+      // Refresh na pagina ao ordenar
+      //window.location.reload();
+    });  
+  }  
 });

@@ -77,18 +77,3 @@
 		</ul>		
 	</div>
 </div>
-
-
-
-
-
-
-<hr>
-
-<div class="row-fluid">
-	<div class="span12">
-		<a href="javascript:void(0)" class="btn btn-primary btn_refresh">
-			<i class="icon-th-list icon-white"></i> 
-			Reordenar</a>		
-	</div>
-</div>
