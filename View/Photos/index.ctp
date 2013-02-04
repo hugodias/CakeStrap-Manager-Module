@@ -43,26 +43,6 @@
 	</div>
 </div>
 
-<!-- <div class="row-fluid">
-	<div class="span12">
-		<ul class="thumbnails">
-			<?php $i=0; ?>
-			<?php foreach ($photos as $photo): ?>
-
-				<?php if ($i%4 == 0): ?>
-					</ul>
-					<ul class="thumbnails">
-				<?php endif ?>
-				<li class="span3" alt="<?php echo $photo['Photo']['id'] ?>">
-	                <div class="thumbnail">
-	                  <img src="<?php echo $this->params->webroot.$photo['Photo']['thumbnail'] ?>" alt="<?php echo $photo['Photo']['nome'] ?>" title="<?php echo $photo['Photo']['nome'] ?>" width="218px" height="163px">
-	                </div>				
-				</li>
-				<?php $i++; ?>
-			<?php endforeach ?>
-		</ul>		
-	</div>
-</div> -->
 
 <div class="row-fluid">
 	<div class="span12">
