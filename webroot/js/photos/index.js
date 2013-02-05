@@ -5,6 +5,7 @@ $(function(){
   $thumbnail = $('#sortable');
 
   $( "#sortable" ).sortable({
+    opacity: 0.5,
     update: function(event,ui) {
       saveOrder();
     }
