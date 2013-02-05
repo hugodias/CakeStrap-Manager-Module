@@ -34,6 +34,7 @@ CakePlugin::load(array(
 
 ##### Fotos
 2. Galeria de fotos
+3. Ordenação de fotos
 3. Multiple photo upload
 4. Thumbnails
 
