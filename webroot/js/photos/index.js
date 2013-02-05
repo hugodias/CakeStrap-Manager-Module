@@ -74,23 +74,43 @@ $(function(){
 
   $('.btn_delete_all').click(function(){
     var photos;
-    // Converte o array em uma string com os valores separados por virgula
-    photos = photosArr.join(",");
+    
+    if ( confirm_delete() ) {
 
-    // Envia o array com as fotos selecionadas para remover
-    $.post(BASE_URL + '/photos/delete_all',{
-      photos: photos
-    }, function(response){
-      // Esconde as fotos
-      hideDeletedPhotos();
+      // Converte o array em uma string com os valores separados por virgula
+      photos = photosArr.join(",");
 
-      // Limpa o array
-      photosArr = Array();
+      // Envia o array com as fotos selecionadas para remover
+      $.post(BASE_URL + '/photos/delete_all',{
+        photos: photos
+      }, function(response){
+        // Esconde as fotos
+        hideDeletedPhotos();
 
-      // Esconde o botao de deletar
-      showDeleteButton();
-    });
+        // Limpa o array
+        photosArr = Array();
+
+        // Esconde o botao de deletar
+        showDeleteButton();
+
+        // Troca a label do numero de fotos selecionadas
+        countPhotos();
+      });
+    } 
+
   });
+
+
+  function confirm_delete() {
+    var r = confirm("Deseja realmente remover " + photosArr.length + " fotos?")
+    if (r==true) {
+      return true;
+    } else {
+      return false;
+    }
+
+    return false;
+  }
 
   function countPhotos() {
     var count = photosArr.length;
