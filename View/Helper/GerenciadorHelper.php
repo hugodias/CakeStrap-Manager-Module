@@ -57,7 +57,10 @@ class GerenciadorHelper extends HtmlHelper {
   		$this->setAction($this->params->action);
   	}
 
-
+/**
+*	Adicionar automaticamente os scripts ao layout
+*
+*/
   	public function automaticScript()
   	{
   		# CSS Plugin Path
@@ -68,6 +71,10 @@ class GerenciadorHelper extends HtmlHelper {
 		return false;
   	}
 
+/**
+*	Adicionar automaticamente o css ao layout
+*
+*/
   	public function automaticCss()
   	{
   		# CSS Plugin Path
