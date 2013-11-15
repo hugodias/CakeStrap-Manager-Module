@@ -23,14 +23,8 @@
   <?php echo $this->Html->css( 'Gerenciador.style') ?>
   
 
-  <?php
-  # CSS Plugin Path
-  $css_path = ROOT . DS . 'app' . DS . 'Plugin' . DS . $this->plugin . DS . 'webroot' . DS . 'css';
+  <?php echo $this->Gerenciador->automaticCss();?>
 
-  if (is_file($css_path . DS . $this->params->controller . DS . $this->params->action . '.css')) {
-    echo $this->Html->css('/'.$this->params->plugin.'/css/'.$this->params->controller . '/' . $this->params->action);
-  }
-  ?>
 
   <?php echo $this->Html->script( $this->plugin. '.lib/modernizr') ?>
 </head>
@@ -112,15 +106,7 @@
                   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
                   <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/jquery-ui.min.js"></script>
                   <?php echo $this->Html->script( 'Gerenciador.lib/jquery.tmpl.min') ?>
-                  <?php
-
-                  # Path for plugin assets
-                  $js_path = ROOT . DS . 'app' . DS . 'Plugin' . DS . $this->plugin . DS . 'webroot' . DS . 'js';
-
-                  if (is_file($js_path . DS . $this->params->controller . DS . $this->params->action . '.js')) {
-                    echo $this->Html->script('/'.$this->params->plugin.'/js/'.$this->params->controller . '/' . $this->params->action);
-                  }
-                  ?>
+                  <?php echo $this->Gerenciador->automaticScript();?>
                   
                   <?php echo $this->Html->script(
                     array(
