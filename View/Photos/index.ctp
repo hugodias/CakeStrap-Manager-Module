@@ -1,4 +1,5 @@
-<div id="base" alt="<?php echo "http://".$_SERVER['SERVER_NAME'].Router::url('/').$this->params->plugin?>"></div>
+<div id="base" alt="<?php echo Router::url('/',true).$this->params->plugin?>"></div>
+
 <div class="row-fluid">
 	<div class="span10">
 		<h2>Fotos</h2>

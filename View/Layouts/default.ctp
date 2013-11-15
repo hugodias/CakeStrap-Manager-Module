@@ -26,7 +26,10 @@
   <?php echo $this->Gerenciador->automaticCss();?>
 
 
-  <?php echo $this->Html->script( $this->plugin. '.lib/modernizr') ?>
+  <?php echo $this->Html->script( $this->plugin. '.lib/modernizr');?>
+  <script type="text/javascript">
+      var baseUrl = "<?php echo Router::url('/',true);?>";
+  </script>
 </head>
 <body>
         <!--[if lt IE 7]>
