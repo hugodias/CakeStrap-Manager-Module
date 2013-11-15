@@ -63,7 +63,7 @@ class GerenciadorHelper extends HtmlHelper {
 */
   	public function automaticScript()
   	{
-  		# CSS Plugin Path
+  		# JS Plugin Path
 		$js_path = $this->pluginPath . WEBROOT_DIR . DS . JS_URL;
 	  	if (is_file($js_path . $this->controller . DS . $this->action . '.js')) {
 	    	return $this->script($this->plugin.'.'.$this->controller . '/' . $this->action);
