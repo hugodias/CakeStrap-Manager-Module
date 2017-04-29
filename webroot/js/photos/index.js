@@ -1,4 +1,4 @@
-$(function(){
+$(() => {
   var photosArr = Array();
   var selected = false;  
   var BASE_URL = $('#base').attr('alt');
@@ -6,14 +6,14 @@ $(function(){
 
   $( "#sortable" ).sortable({
     opacity: 0.5,
-    update: function(event,ui) {
+    update(event, ui) {
       saveOrder();
     }
   });
   $( "#sortable" ).disableSelection();
 
 
-  $('.btn_selecionar_todas').click(function(){
+  $('.btn_selecionar_todas').click(() => {
     // Limpa o array
     photosArr = Array();
 
@@ -73,7 +73,7 @@ $(function(){
     showDeleteButton();
   });
 
-  $('.btn_delete_all').click(function(){
+  $('.btn_delete_all').click(() => {
     var photos;
     
     if ( confirm_delete() ) {
@@ -83,8 +83,8 @@ $(function(){
 
       // Envia o array com as fotos selecionadas para remover
       $.post(BASE_URL + '/photos/delete_all',{
-        photos: photos
-      }, function(response){
+        photos
+      }, response => {
         // Esconde as fotos
         hideDeletedPhotos();
 
@@ -139,7 +139,7 @@ $(function(){
     var sorted = $( "#sortable" ).sortable( "toArray" ).join(",");
     $.post(BASE_URL + '/photos/sort',{
       order: sorted
-    },function(response){
+    },response => {
       // Refresh na pagina ao ordenar
       //window.location.reload();
     });  

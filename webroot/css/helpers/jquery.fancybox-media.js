@@ -61,31 +61,32 @@
  *          http://maps.google.com/?ll=48.857995,2.294297&spn=0.007666,0.021136&t=m&z=16
  *          http://maps.google.com/?ll=48.859463,2.292626&spn=0.000965,0.002642&t=m&z=19&layer=c&cbll=48.859524,2.292532&panoid=YJ0lq28OOy3VT2IqIuVY0g&cbp=12,151.58,,0,-15.56
  */
-(function ($) {
-	"use strict";
+(($ => {
+    "use strict";
 
-	//Shortcut for fancyBox object
-	var F = $.fancybox,
-		format = function( url, rez, params ) {
-			params = params || '';
+    //Shortcut for fancyBox object
+    var F = $.fancybox;
 
-			if ( $.type( params ) === "object" ) {
-				params = $.param(params, true);
-			}
+    var format = (url, rez, params) => {
+        params = params || '';
 
-			$.each(rez, function(key, value) {
-				url = url.replace( '$' + key, value || '' );
-			});
+        if ( $.type( params ) === "object" ) {
+            params = $.param(params, true);
+        }
 
-			if (params.length) {
-				url += ( url.indexOf('?') > 0 ? '&' : '?' ) + params;
-			}
+        $.each(rez, (key, value) => {
+            url = url.replace( '$' + key, value || '' );
+        });
 
-			return url;
-		};
+        if (params.length) {
+            url += ( url.indexOf('?') > 0 ? '&' : '?' ) + params;
+        }
 
-	//Add helper object
-	F.helpers.media = {
+        return url;
+    };
+
+    //Add helper object
+    F.helpers.media = {
 		defaults : {
 			youtube : {
 				matcher : /(youtube\.com|youtu\.be)\/(watch\?v=|v\/|u\/|embed\/?)?(videoseries\?list=(.*)|[\w-]{11}|\?listType=(.*)&list=(.*)).*/i,
@@ -120,7 +121,7 @@
 					autoPlay : 'yes'
 				},
 				type : 'swf',
-				url  : function( rez, params, obj ) {
+				url(rez, params, obj) {
 					obj.swf.flashVars = 'playerVars=' + $.param( params, true );
 
 					return '//www.metacafe.com/fplayer/' + rez[1] + '/.swf';
@@ -156,21 +157,21 @@
 			google_maps : {
 				matcher : /maps\.google\.([a-z]{2,3}(\.[a-z]{2})?)\/(\?ll=|maps\?)(.*)/i,
 				type : 'iframe',
-				url  : function( rez ) {
+				url(rez) {
 					return '//maps.google.' + rez[1] + '/' + rez[3] + '' + rez[4] + '&output=' + (rez[4].indexOf('layer=c') > 0 ? 'svembed' : 'embed');
 				}
 			}
 		},
 
-		beforeLoad : function(opts, obj) {
-			var url   = obj.href || '',
-				type  = false,
-				what,
-				item,
-				rez,
-				params;
+		beforeLoad(opts, obj) {
+            var url   = obj.href || '';
+            var type  = false;
+            var what;
+            var item;
+            var rez;
+            var params;
 
-			for (what in opts) {
+            for (what in opts) {
 				item = opts[ what ];
 				rez  = url.match( item.matcher );
 
@@ -184,13 +185,12 @@
 				}
 			}
 
-			if (type) {
+            if (type) {
 				obj.href = url;
 				obj.type = type;
 
 				obj.autoHeight = false;
 			}
-		}
+        }
 	};
-
-}(jQuery));
+})(jQuery));

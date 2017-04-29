@@ -13,7 +13,7 @@
  *     });
  *
  */
-(function ($) {
+(($ => {
 	//Shortcut for fancyBox object
 	var F = $.fancybox;
 
@@ -28,7 +28,7 @@
 		list : null,
 		buttons: null,
 
-		beforeLoad: function (opts, obj) {
+		beforeLoad(opts, obj) {
 			//Remove self if gallery do not have at least two items
 
 			if (opts.skipSingle && obj.group.length < 2) {
@@ -42,19 +42,19 @@
 			obj.margin[ opts.position === 'bottom' ? 2 : 0 ] += 30;
 		},
 
-		onPlayStart: function () {
+		onPlayStart() {
 			if (this.buttons) {
 				this.buttons.play.attr('title', 'Pause slideshow').addClass('btnPlayOn');
 			}
 		},
 
-		onPlayEnd: function () {
+		onPlayEnd() {
 			if (this.buttons) {
 				this.buttons.play.attr('title', 'Start slideshow').removeClass('btnPlayOn');
 			}
 		},
 
-		afterShow: function (opts, obj) {
+		afterShow(opts, obj) {
 			var buttons = this.buttons;
 
 			if (!buttons) {
@@ -90,7 +90,7 @@
 			this.onUpdate(opts, obj);
 		},
 
-		onUpdate: function (opts, obj) {
+		onUpdate(opts, obj) {
 			var toggle;
 
 			if (!this.buttons) {
@@ -108,7 +108,7 @@
 			}
 		},
 
-		beforeClose: function () {
+		beforeClose() {
 			if (this.list) {
 				this.list.remove();
 			}
@@ -118,4 +118,4 @@
 		}
 	};
 
-}(jQuery));
+})(jQuery));
