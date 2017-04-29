@@ -14,7 +14,7 @@
  *     });
  *
  */
-(function ($) {
+(($ => {
 	//Shortcut for fancyBox object
 	var F = $.fancybox;
 
@@ -24,7 +24,7 @@
 			width    : 50,       // thumbnail width
 			height   : 50,       // thumbnail height
 			position : 'bottom', // 'top' or 'bottom'
-			source   : function ( item ) {  // function to obtain the URL of the thumbnail image
+			source(item) {  // function to obtain the URL of the thumbnail image
 				var href;
 
 				if (item.element) {
@@ -43,25 +43,25 @@
 		list  : null,
 		width : 0,
 
-		init: function (opts, obj) {
-			var that = this,
-				list,
-				thumbWidth  = opts.width,
-				thumbHeight = opts.height,
-				thumbSource = opts.source;
+		init(opts, obj) {
+            var that = this;
+            var list;
+            var thumbWidth  = opts.width;
+            var thumbHeight = opts.height;
+            var thumbSource = opts.source;
 
-			//Build list structure
-			list = '';
+            //Build list structure
+            list = '';
 
-			for (var n = 0; n < obj.group.length; n++) {
+            for (var n = 0; n < obj.group.length; n++) {
 				list += '<li><a style="width:' + thumbWidth + 'px;height:' + thumbHeight + 'px;" href="javascript:jQuery.fancybox.jumpto(' + n + ');"></a></li>';
 			}
 
-			this.wrap = $('<div id="fancybox-thumbs"></div>').addClass(opts.position).appendTo('body');
-			this.list = $('<ul>' + list + '</ul>').appendTo(this.wrap);
+            this.wrap = $('<div id="fancybox-thumbs"></div>').addClass(opts.position).appendTo('body');
+            this.list = $('<ul>' + list + '</ul>').appendTo(this.wrap);
 
-			//Load each thumbnail
-			$.each(obj.group, function (i) {
+            //Load each thumbnail
+            $.each(obj.group, i => {
 				var href = thumbSource( obj.group[ i ] );
 
 				if (!href) {
@@ -69,21 +69,23 @@
 				}
 
 				$("<img />").load(function () {
-					var width  = this.width,
-						height = this.height,
-						widthRatio, heightRatio, parent;
+                    var width  = this.width;
+                    var height = this.height;
+                    var widthRatio;
+                    var heightRatio;
+                    var parent;
 
-					if (!that.list || !width || !height) {
+                    if (!that.list || !width || !height) {
 						return;
 					}
 
-					//Calculate thumbnail width/height and center it
-					widthRatio  = width / thumbWidth;
-					heightRatio = height / thumbHeight;
+                    //Calculate thumbnail width/height and center it
+                    widthRatio  = width / thumbWidth;
+                    heightRatio = height / thumbHeight;
 
-					parent = that.list.children().eq(i).find('a');
+                    parent = that.list.children().eq(i).find('a');
 
-					if (widthRatio >= 1 && heightRatio >= 1) {
+                    if (widthRatio >= 1 && heightRatio >= 1) {
 						if (widthRatio > heightRatio) {
 							width  = Math.floor(width / heightRatio);
 							height = thumbHeight;
@@ -94,27 +96,26 @@
 						}
 					}
 
-					$(this).css({
-						width  : width,
-						height : height,
+                    $(this).css({
+						width,
+						height,
 						top    : Math.floor(thumbHeight / 2 - height / 2),
 						left   : Math.floor(thumbWidth / 2 - width / 2)
 					});
 
-					parent.width(thumbWidth).height(thumbHeight);
+                    parent.width(thumbWidth).height(thumbHeight);
 
-					$(this).hide().appendTo(parent).fadeIn(300);
-
-				}).attr('src', href);
+                    $(this).hide().appendTo(parent).fadeIn(300);
+                }).attr('src', href);
 			});
 
-			//Set initial width
-			this.width = this.list.children().eq(0).outerWidth(true);
+            //Set initial width
+            this.width = this.list.children().eq(0).outerWidth(true);
 
-			this.list.width(this.width * (obj.group.length + 1)).css('left', Math.floor($(window).width() * 0.5 - (obj.index * this.width + this.width * 0.5)));
-		},
+            this.list.width(this.width * (obj.group.length + 1)).css('left', Math.floor($(window).width() * 0.5 - (obj.index * this.width + this.width * 0.5)));
+        },
 
-		beforeLoad: function (opts, obj) {
+		beforeLoad(opts, obj) {
 			//Remove self if gallery do not have at least two items
 			if (obj.group.length < 2) {
 				obj.helpers.thumbs = false;
@@ -126,7 +127,7 @@
 			obj.margin[ opts.position === 'top' ? 0 : 2 ] += ((opts.height) + 15);
 		},
 
-		afterShow: function (opts, obj) {
+		afterShow(opts, obj) {
 			//Check if exists and create or update list
 			if (this.list) {
 				this.onUpdate(opts, obj);
@@ -140,7 +141,7 @@
 		},
 
 		//Center list
-		onUpdate: function (opts, obj) {
+		onUpdate(opts, obj) {
 			if (this.list) {
 				this.list.stop(true).animate({
 					'left': Math.floor($(window).width() * 0.5 - (obj.index * this.width + this.width * 0.5))
@@ -148,7 +149,7 @@
 			}
 		},
 
-		beforeClose: function () {
+		beforeClose() {
 			if (this.wrap) {
 				this.wrap.remove();
 			}
@@ -159,4 +160,4 @@
 		}
 	}
 
-}(jQuery));
+})(jQuery));

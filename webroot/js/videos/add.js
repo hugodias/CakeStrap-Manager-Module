@@ -1,38 +1,39 @@
-$(function(){
+$(() => {
 
-	$('#search-video').submit(function(){
-		var url,ID;
-    url = $('#link_video').val();
-    ID = youtube_parser(url);
+	$('#search-video').submit(() => {
+      var url;
+      var ID;
+      url = $('#link_video').val();
+      ID = youtube_parser(url);
 
-    if( ID ) {
-      // Remove a mascara branca
-      showVideo();
+      if( ID ) {
+        // Remove a mascara branca
+        showVideo();
 
-      // Faz o load do video e mostra na tela
-      loadVideo(ID);
+        // Faz o load do video e mostra na tela
+        loadVideo(ID);
 
-      // Mostra os botões de decisão
-      $('.check_buttons').show();
+        // Mostra os botões de decisão
+        $('.check_buttons').show();
 
-      // Coloca o ID do video no input hidden
-      $('.id_video').val(ID);
+        // Coloca o ID do video no input hidden
+        $('.id_video').val(ID);
 
-      // Pega as informações do video no youtube via JSON
-      getVideoInfo(ID,function(data){
-        $('.nome_video').val(data.title);
-        $('.thumb_video').val(data.thumbnail.hqDefault);
-      });
-    } else {
-      alert('URL inválida');
-      $('#link_video').val('').focus();
-    }
+        // Pega as informações do video no youtube via JSON
+        getVideoInfo(ID,data => {
+          $('.nome_video').val(data.title);
+          $('.thumb_video').val(data.thumbnail.hqDefault);
+        });
+      } else {
+        alert('URL inválida');
+        $('#link_video').val('').focus();
+      }
 
 
-		return false;
-	});
+      return false;
+    });
 
-  $('.error-button').live('click',function(){
+  $('.error-button').live('click',() => {
     $('.check_buttons').hide();
     $('.id_video').val('');
     $('.nome_video').val('');
@@ -49,7 +50,7 @@ function hideVideo(){
 }
 
 function getVideoInfo (ID, callback) {
-  return $.getJSON('http://gdata.youtube.com/feeds/api/videos/'+ID+'?v=2&alt=jsonc',function(data,status,xhr){
+  return $.getJSON('http://gdata.youtube.com/feeds/api/videos/'+ID+'?v=2&alt=jsonc',(data, status, xhr) => {
       callback(data.data);
   });
 }

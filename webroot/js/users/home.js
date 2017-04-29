@@ -1,11 +1,11 @@
 /**
 * This script is automatically called when the user is in the controller 'users' and action 'home'
 */
-;(function() {
-  var App,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+;((() => {
+  var App;
+  var __bind = (fn, me) => function(...args) { return fn.apply(me, args); };
 
-  App = (function() {
+  App = ((() => {
   	// Constructor
     function App() {
       this.initialize();
@@ -17,11 +17,16 @@
     }
 
     // Delete users modal
-    App.prototype.deleteUserModal = function() {
+    App.prototype.deleteUserModal = () => {
 
       // Changes the URL to delete on each user click
       $('.btn-remove-modal').bind('click',function(e) {
-        var uid,name,href,pattern,$label,$link;
+        var uid;
+        var name;
+        var href;
+        var pattern;
+        var $label;
+        var $link;
 
         $label  = $('.label-uname');
         $link   = $('.delete-user-link');
@@ -42,10 +47,7 @@
 
     return App;
 
-  })();
+  }))();
 
-  $(function() {
-    return App = new App();
-  });
-
-}).call(this);
+  $(() => App = new App());
+})).call(this);

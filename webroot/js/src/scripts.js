@@ -2,11 +2,11 @@
 * This is your App script template. Is already working, all you need to do it build your functions and play :)
 * Here you can already use Jquery, Modernizr and Bootstrap.js
 */
-;(function() {
-  var App,
-    __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+;((() => {
+  var App;
+  var __bind = (fn, me) => function(...args) { return fn.apply(me, args); };
 
-  App = (function() {
+  App = ((() => {
   	// Constructor
     function App() {
       this.initialize();
@@ -16,7 +16,7 @@
       this.plugins();
     }
 
-    App.prototype.plugins = function() {
+    App.prototype.plugins = () => {
 
       if( $(".fancybox-media").length > 0 ) {
         $(".fancybox-media").fancybox({
@@ -40,10 +40,7 @@
 
     return App;
 
-  })();
+  }))();
 
-  $(function() {
-    return App = new App();
-  });
-
-}).call(this);
+  $(() => App = new App());
+})).call(this);
